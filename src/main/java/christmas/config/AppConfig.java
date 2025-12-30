@@ -1,6 +1,7 @@
 package christmas.config;
 
 import christmas.controller.EventController;
+import christmas.model.OrderParser;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -9,10 +10,11 @@ public class AppConfig {
     private EventController eventController;
     private OutputView outputView;
     private InputView inputView;
+    private OrderParser orderParser;
 
     public EventController eventController() {
         if (eventController == null) {
-            eventController = new EventController(outputView(), inputView());
+            eventController = new EventController(outputView(), inputView(), orderParser());
         }
         return eventController;
     }
@@ -29,5 +31,12 @@ public class AppConfig {
             inputView = new InputView();
         }
         return inputView;
+    }
+
+    private OrderParser orderParser() {
+        if (orderParser == null) {
+            orderParser = new OrderParser();
+        }
+        return orderParser;
     }
 }
