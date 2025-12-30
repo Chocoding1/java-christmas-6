@@ -1,7 +1,7 @@
 package christmas.model;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +23,7 @@ public class OrderParser {
     }
 
     private Order parserOrder(List<String> orderTokens) {
-        Map<Menu, Integer> order = new HashMap<>();
+        EnumMap<Menu, Integer> order = new EnumMap<>(Menu.class);
         for (String orderToken : orderTokens) {
             List<String> menuToken = splitByHyphen(orderToken);
             validateFormat(menuToken);
