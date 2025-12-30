@@ -1,16 +1,18 @@
 package christmas.config;
 
 import christmas.controller.EventController;
+import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class AppConfig {
 
     private EventController eventController;
     private OutputView outputView;
+    private InputView inputView;
 
     public EventController eventController() {
         if (eventController == null) {
-            eventController = new EventController(outputView());
+            eventController = new EventController(outputView(), inputView());
         }
         return eventController;
     }
@@ -20,5 +22,12 @@ public class AppConfig {
             outputView = new OutputView();
         }
         return outputView;
+    }
+
+    private InputView inputView() {
+        if (inputView == null) {
+            inputView = new InputView();
+        }
+        return inputView;
     }
 }
