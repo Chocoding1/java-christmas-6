@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.model.EventBenefits;
 import christmas.model.Order;
 import christmas.model.OrderParser;
 import christmas.model.VisitingDate;
@@ -24,5 +25,8 @@ public class EventController {
         VisitingDate visitingDate = new VisitingDate(date);
         String input = inputView.readOrder();
         Order order = orderParser.parse(input);
+        outputView.printMenu(order);
+//        EventBenefits eventBenefits = new EventBenefits(visitingDate, order);
+//        eventBenefits.calculateBenefits();
     }
 }

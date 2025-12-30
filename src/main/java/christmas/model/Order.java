@@ -9,4 +9,18 @@ public class Order {
     public Order(Map<Menu, Integer> order) {
         this.order = order;
     }
+
+    public Map<Menu, Integer> getOrder() {
+        return Map.copyOf(order);
+    }
+
+//    public int totalPrice() {
+//        int totalPrice = 0;
+//        for (Menu menu : order.keySet()) {
+//            int menuPrice = menu.getPrice();
+//            Integer amount = order.get(menu);
+//            totalPrice += menuPrice * amount;
+//        }
+//        return totalPrice;
+//    }
 }

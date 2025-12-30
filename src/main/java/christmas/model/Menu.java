@@ -19,7 +19,6 @@ public enum Menu {
     CHAMPAGNE("샴페인", 25000),
     ;
 
-
     private static final String ERROR_INVALID_ORDER = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
 
     private final String name;
@@ -28,6 +27,14 @@ public enum Menu {
     Menu(String name, int price) {
         this.name = name;
         this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public static Menu of(String name) {
