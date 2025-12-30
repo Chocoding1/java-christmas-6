@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.model.VisitingDate;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -16,5 +17,6 @@ public class EventController {
     public void run() {
         outputView.printWelcome();
         int date = inputView.readDate();
+        VisitingDate visitingDate = new VisitingDate(date);
     }
 }
