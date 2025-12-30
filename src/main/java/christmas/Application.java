@@ -1,8 +1,12 @@
 package christmas;
 
+import christmas.config.AppConfig;
+import christmas.controller.EventController;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-        System.out.println("시작 지점");
+        AppConfig appConfig = new AppConfig();
+        EventController eventController = appConfig.eventController();
+        eventController.run();
     }
 }
