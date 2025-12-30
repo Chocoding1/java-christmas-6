@@ -26,6 +26,7 @@ public class EventController {
         String input = inputView.readOrder();
         Order order = orderParser.parse(input);
         outputView.printMenu(order);
+        outputView.printTotalPrice(order);
 //        EventBenefits eventBenefits = new EventBenefits(visitingDate, order);
 //        eventBenefits.calculateBenefits();
     }

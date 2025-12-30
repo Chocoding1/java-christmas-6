@@ -14,13 +14,13 @@ public class Order {
         return Map.copyOf(order);
     }
 
-//    public int totalPrice() {
-//        int totalPrice = 0;
-//        for (Menu menu : order.keySet()) {
-//            int menuPrice = menu.getPrice();
-//            Integer amount = order.get(menu);
-//            totalPrice += menuPrice * amount;
-//        }
-//        return totalPrice;
-//    }
+    public int totalPrice() {
+        int totalPrice = 0;
+        for (Menu menu : order.keySet()) {
+            int menuPrice = menu.getPrice();
+            Integer amount = order.get(menu);
+            totalPrice += menuPrice * amount;
+        }
+        return totalPrice;
+    }
 }
