@@ -21,15 +21,15 @@ public class VisitingDate {
 
     private final int date;
     private final int dDayDiscountAmount;
-    private boolean weekendsDiscount;
-    private boolean specialDiscount;
+    private final boolean weekendsDiscount;
+    private final boolean specialDiscount;
 
     public VisitingDate(int date) {
         validateRange(date);
         this.date = date;
-        this.dDayDiscountAmount = calculatedDayDiscountAmount(date);
-        this.weekendsDiscount = setWeekendsDiscount(date);
-        this.specialDiscount = setSpecialDiscount(date);
+        this.dDayDiscountAmount = calculatedDayDiscountAmount();
+        this.weekendsDiscount = setWeekendsDiscount();
+        this.specialDiscount = setSpecialDiscount();
     }
 
     public int getDDayDiscountAmount() {
@@ -50,7 +50,7 @@ public class VisitingDate {
         }
     }
 
-    private int calculatedDayDiscountAmount(int date) {
+    private int calculatedDayDiscountAmount() {
         if (date > CHRISTMAS_DATE) {
             return 0;
         }
@@ -58,14 +58,14 @@ public class VisitingDate {
         return (date - FIRST_DATE) * INCREMENT_AMOUNT + START_DISCOUNT_AMOUNT;
     }
 
-    private boolean setWeekendsDiscount(int date) {
+    private boolean setWeekendsDiscount() {
         LocalDate localDate = LocalDate.of(YEAR, MONTH, date);
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
         return dayOfWeek.getValue() == FRIDAY_VALUE || dayOfWeek.getValue() == SATURDAY_VALUE;
     }
 
-    private boolean setSpecialDiscount(int date) {
+    private boolean setSpecialDiscount() {
         LocalDate localDate = LocalDate.of(YEAR, MONTH, date);
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
