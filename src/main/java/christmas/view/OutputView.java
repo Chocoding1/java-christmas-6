@@ -1,5 +1,7 @@
 package christmas.view;
 
+import christmas.model.BenefitDetails;
+import christmas.model.Event;
 import christmas.model.EventBenefits;
 import christmas.model.Menu;
 import christmas.model.Order;
@@ -45,5 +47,15 @@ public class OutputView {
         }
 
         System.out.println(NON_FREE_GIFT_NOTICE);
+    }
+
+    public void printBenefitDetails(EventBenefits eventBenefits) {
+        BenefitDetails details = eventBenefits.getBenefitDetails();
+        Map<Event, Integer> detailsMap = details.getDetails();
+        DecimalFormat df = new DecimalFormat("###,###,###");
+
+        for (Event event : detailsMap.keySet()) {
+            System.out.println(event.getName() + ": -" + df.format(detailsMap.get(event)) + "원");
+        }
     }
 }

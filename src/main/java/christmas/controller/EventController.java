@@ -29,5 +29,6 @@ public class EventController {
         outputView.printTotalPrice(order);
         EventBenefits eventBenefits = new EventBenefits(visitingDate, order);
         outputView.printFreeGift(eventBenefits);
+        outputView.printBenefitDetails(eventBenefits);
     }
 }

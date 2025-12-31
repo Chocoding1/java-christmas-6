@@ -32,6 +32,18 @@ public class VisitingDate {
         this.specialDiscount = setSpecialDiscount(date);
     }
 
+    public int getDDayDiscountAmount() {
+        return dDayDiscountAmount;
+    }
+
+    public boolean isWeekendsDiscount() {
+        return weekendsDiscount;
+    }
+
+    public boolean isSpecialDiscount() {
+        return specialDiscount;
+    }
+
     private void validateRange(int date) {
         if (date < FIRST_DATE || LAST_DATE < date) {
             throw new IllegalArgumentException(ERROR_OUT_OF_RANGE_DATE);
