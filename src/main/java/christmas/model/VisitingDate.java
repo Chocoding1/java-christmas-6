@@ -17,7 +17,7 @@ public class VisitingDate {
     private static final int START_DISCOUNT_AMOUNT = 1000;
     private static final int INCREMENT_AMOUNT = 100;
 
-    private static final String ERROR_OUT_OF_RANGE_DATE = "[ERROR] 방문 날짜는 1 ~ 31 사이의 숫자로만 입력해주세요.";
+    private static final String ERROR_OUT_OF_RANGE_DATE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해주세요.";
 
     private final int date;
     private final int dDayDiscountAmount;

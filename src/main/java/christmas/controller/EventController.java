@@ -1,5 +1,8 @@
 package christmas.controller;
 
+import static christmas.handler.ExceptionHandler.*;
+
+import christmas.handler.ExceptionHandler;
 import christmas.model.EventBenefits;
 import christmas.model.Order;
 import christmas.model.OrderParser;
@@ -21,10 +24,8 @@ public class EventController {
 
     public void run() {
         outputView.printWelcome();
-        int date = inputView.readDate();
-        VisitingDate visitingDate = new VisitingDate(date);
-        String input = inputView.readOrder();
-        Order order = orderParser.parse(input);
+        VisitingDate visitingDate = retryUtilSuccess(this::getVisitingDate);
+        Order order = retryUtilSuccess(this::getOrder);
         outputView.printMenu(order);
         outputView.printTotalPrice(order);
         EventBenefits eventBenefits = new EventBenefits(visitingDate, order);
@@ -33,5 +34,17 @@ public class EventController {
         outputView.printTotalBenefitAmount(eventBenefits);
         outputView.printExpectedPayAmount(eventBenefits);
         outputView.printEventBadge(eventBenefits);
+    }
+
+    private Order getOrder() {
+        String input = inputView.readOrder();
+        Order order = orderParser.parse(input);
+        return order;
+    }
+
+    private VisitingDate getVisitingDate() {
+        int date = inputView.readDate();
+        VisitingDate visitingDate = new VisitingDate(date);
+        return visitingDate;
     }
 }

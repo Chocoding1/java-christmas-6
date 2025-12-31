@@ -27,6 +27,7 @@ public class OrderParser {
         for (String orderToken : orderTokens) {
             List<String> menuToken = splitByHyphen(orderToken);
             validateFormat(menuToken);
+
             Menu menu = findMenu(menuToken);
             int amount = getAmount(menuToken);
             validateDuplicate(order, menu);
