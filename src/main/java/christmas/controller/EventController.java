@@ -26,9 +26,14 @@ public class EventController {
         outputView.printWelcome();
         VisitingDate visitingDate = retryUtilSuccess(this::getVisitingDate);
         Order order = retryUtilSuccess(this::getOrder);
+        EventBenefits eventBenefits = new EventBenefits(visitingDate, order);
+        printBenefitsPreview(order, eventBenefits);
+    }
+
+    private void printBenefitsPreview(Order order, EventBenefits eventBenefits) {
+        outputView.printPreviewTitle();
         outputView.printMenu(order);
         outputView.printTotalPrice(order);
-        EventBenefits eventBenefits = new EventBenefits(visitingDate, order);
         outputView.printFreeGift(eventBenefits);
         outputView.printBenefitDetails(eventBenefits);
         outputView.printTotalBenefitAmount(eventBenefits);
