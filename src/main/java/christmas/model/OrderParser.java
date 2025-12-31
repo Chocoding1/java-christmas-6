@@ -47,7 +47,7 @@ public class OrderParser {
     }
 
     private Menu findMenu(List<String> menuToken) {
-        return Menu.of(menuToken.get(0));
+        return Menu.from(menuToken.get(0));
     }
 
     private int getAmount(List<String> menuToken) {

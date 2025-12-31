@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.model.BenefitDetails;
 import christmas.model.Event;
+import christmas.model.EventBadge;
 import christmas.model.EventBenefits;
 import christmas.model.Menu;
 import christmas.model.Order;
@@ -15,8 +16,9 @@ public class OutputView {
     private static final String TOTAL_PRICE_TITLE = "<할인 전 총주문 금액>";
     private static final String FREE_GIFT_TITLE = "<증정 메뉴>";
     private static final String BENEFIT_DETAILS_TITLE = "<혜택 내역>";
-    private static final String TOTAL_BENEFIT_PRICE_TITLE = "<총혜택 금액>";
+    private static final String TOTAL_BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
     private static final String EXPECTED_PAY_AMOUNT_TITLE = "<할인 후 예상 결제 금액>";
+    private static final String EVENT_BADGE_TITLE = "<12월 이벤트 배지>";
 
     private static final String FREE_GIFT_NOTICE = "샴페인 1개";
     private static final String NON_FREE_GIFT_NOTICE = "없음";
@@ -61,13 +63,18 @@ public class OutputView {
         }
     }
 
-    public void printTotalBenefitPrice(EventBenefits eventBenefits) {
-        System.out.println(TOTAL_BENEFIT_PRICE_TITLE);
-        System.out.println("-" + df.format(eventBenefits.getTotalBenefitPrice()) + "원");
+    public void printTotalBenefitAmount(EventBenefits eventBenefits) {
+        System.out.println(TOTAL_BENEFIT_AMOUNT_TITLE);
+        System.out.println("-" + df.format(eventBenefits.getTotalBenefitAmount()) + "원");
     }
 
     public void printExpectedPayAmount(EventBenefits eventBenefits) {
         System.out.println(EXPECTED_PAY_AMOUNT_TITLE);
         System.out.println(df.format(eventBenefits.getExpectedPayAmount()) + "원");
+    }
+
+    public void printEventBadge(EventBenefits eventBenefits) {
+        System.out.println(EVENT_BADGE_TITLE);
+        System.out.println(EventBadge.from(eventBenefits.getTotalBenefitAmount()).getName());
     }
 }

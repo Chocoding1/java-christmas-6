@@ -10,29 +10,29 @@ public class EventBenefits {
     private final VisitingDate visitingDate;
     private final Order order;
     private final boolean freeGift;
-    private int totalBenefitPrice;
+    private int totalBenefitAmount;
 
     public EventBenefits(VisitingDate visitingDate, Order order) {
         this.visitingDate = visitingDate;
         this.order = order;
         this.freeGift = canFreeGift(order);
-        this.totalBenefitPrice = 0;
+        this.totalBenefitAmount = 0;
     }
 
     public boolean isFreeGift() {
         return freeGift;
     }
 
-    public int getTotalBenefitPrice() {
-        return totalBenefitPrice;
+    public int getTotalBenefitAmount() {
+        return totalBenefitAmount;
     }
 
     public int getExpectedPayAmount() {
         int totalPrice = order.totalPrice();
         if (freeGift) {
-            return totalPrice - (totalBenefitPrice - Event.FREE_GIFT.getDiscountAmount());
+            return totalPrice - (totalBenefitAmount - Event.FREE_GIFT.getDiscountAmount());
         }
-        return totalPrice - totalBenefitPrice;
+        return totalPrice - totalBenefitAmount;
     }
 
     public BenefitDetails getBenefitDetails() {
@@ -49,7 +49,7 @@ public class EventBenefits {
         if (visitingDate.getDDayDiscountAmount() > 0) {
             int benefitPrice = visitingDate.getDDayDiscountAmount();
             details.put(Event.D_DAY, benefitPrice);
-            totalBenefitPrice += benefitPrice;
+            totalBenefitAmount += benefitPrice;
         }
     }
 
@@ -61,7 +61,7 @@ public class EventBenefits {
                 if (MenuGroup.findByMenu(menu) == MenuGroup.MAIN) {
                     int benefitPrice = orderInfo.get(menu) * Event.WEEKENDS.getDiscountAmount();
                     details.put(Event.WEEKENDS, details.getOrDefault(Event.WEEKENDS, 0) + benefitPrice);
-                    totalBenefitPrice += benefitPrice;
+                    totalBenefitAmount += benefitPrice;
                 }
             }
             return;
@@ -71,7 +71,7 @@ public class EventBenefits {
             if (MenuGroup.findByMenu(menu) == MenuGroup.DESSERT) {
                 int benefitPrice = orderInfo.get(menu) * Event.WEEKDAYS.getDiscountAmount();
                 details.put(Event.WEEKDAYS, details.getOrDefault(Event.WEEKDAYS, 0) + benefitPrice);
-                totalBenefitPrice += benefitPrice;
+                totalBenefitAmount += benefitPrice;
             }
         }
 
@@ -81,7 +81,7 @@ public class EventBenefits {
         if (visitingDate.isSpecialDiscount()) {
             int benefitPrice = Event.SPECIAL.getDiscountAmount();
             details.put(Event.SPECIAL, benefitPrice);
-            totalBenefitPrice += benefitPrice;
+            totalBenefitAmount += benefitPrice;
         }
     }
 
@@ -89,7 +89,7 @@ public class EventBenefits {
         if (freeGift) {
             int benefitPrice = Event.FREE_GIFT.getDiscountAmount();
             details.put(Event.FREE_GIFT, benefitPrice);
-            totalBenefitPrice += benefitPrice;
+            totalBenefitAmount += benefitPrice;
         }
     }
 
