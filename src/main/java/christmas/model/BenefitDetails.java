@@ -14,4 +14,8 @@ public class BenefitDetails {
     public Map<Event, Integer> getDetails() {
         return Map.copyOf(details);
     }
+
+    public boolean isNull() {
+        return details.isEmpty();
+    }
 }

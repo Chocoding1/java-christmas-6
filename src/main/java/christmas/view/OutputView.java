@@ -21,7 +21,7 @@ public class OutputView {
     private static final String EVENT_BADGE_TITLE = "<12월 이벤트 배지>";
 
     private static final String FREE_GIFT_NOTICE = "샴페인 1개";
-    private static final String NON_FREE_GIFT_NOTICE = "없음";
+    private static final String NON_EVENT_NOTICE = "없음";
 
     private final DecimalFormat df = new DecimalFormat("###,###,###");
 
@@ -50,14 +50,19 @@ public class OutputView {
             return;
         }
 
-        System.out.println(NON_FREE_GIFT_NOTICE);
+        System.out.println(NON_EVENT_NOTICE);
     }
 
     public void printBenefitDetails(EventBenefits eventBenefits) {
         System.out.println(BENEFIT_DETAILS_TITLE);
         BenefitDetails details = eventBenefits.getBenefitDetails();
-        Map<Event, Integer> detailsMap = details.getDetails();
 
+        if (details.isNull()) {
+            System.out.println(NON_EVENT_NOTICE);
+            return;
+        }
+
+        Map<Event, Integer> detailsMap = details.getDetails();
         for (Event event : detailsMap.keySet()) {
             System.out.println(event.getName() + ": -" + df.format(detailsMap.get(event)) + "원");
         }
