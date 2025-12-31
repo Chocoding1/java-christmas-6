@@ -30,5 +30,6 @@ public class EventController {
         EventBenefits eventBenefits = new EventBenefits(visitingDate, order);
         outputView.printFreeGift(eventBenefits);
         outputView.printBenefitDetails(eventBenefits);
+        outputView.printTotalBenefitPrice(eventBenefits);
     }
 }

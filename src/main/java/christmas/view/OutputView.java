@@ -5,7 +5,6 @@ import christmas.model.Event;
 import christmas.model.EventBenefits;
 import christmas.model.Menu;
 import christmas.model.Order;
-import java.sql.SQLOutput;
 import java.text.DecimalFormat;
 import java.util.Map;
 
@@ -15,10 +14,13 @@ public class OutputView {
     private static final String ORDER_MENU_TITLE = "<주문 메뉴>";
     private static final String TOTAL_PRICE_TITLE = "<할인 전 총주문 금액>";
     private static final String FREE_GIFT_TITLE = "<증정 메뉴>";
-
+    private static final String BENEFIT_DETAILS_TITLE = "<혜택 내역>";
+    private static final String TOTAL_BENEFIT_PRICE_TITLE = "<총혜택 금액>";
 
     private static final String FREE_GIFT_NOTICE = "샴페인 1개";
     private static final String NON_FREE_GIFT_NOTICE = "없음";
+
+    private final DecimalFormat df = new DecimalFormat("###,###,###");
 
     public void printWelcome() {
         System.out.println(WELCOME_NOTICE);
@@ -35,7 +37,6 @@ public class OutputView {
 
     public void printTotalPrice(Order order) {
         System.out.println(TOTAL_PRICE_TITLE);
-        DecimalFormat df = new DecimalFormat("###,###,###");
         System.out.println(df.format(order.totalPrice()) + "원");
     }
 
@@ -50,12 +51,17 @@ public class OutputView {
     }
 
     public void printBenefitDetails(EventBenefits eventBenefits) {
+        System.out.println(BENEFIT_DETAILS_TITLE);
         BenefitDetails details = eventBenefits.getBenefitDetails();
         Map<Event, Integer> detailsMap = details.getDetails();
-        DecimalFormat df = new DecimalFormat("###,###,###");
 
         for (Event event : detailsMap.keySet()) {
             System.out.println(event.getName() + ": -" + df.format(detailsMap.get(event)) + "원");
         }
+    }
+
+    public void printTotalBenefitPrice(EventBenefits eventBenefits) {
+        System.out.println(TOTAL_BENEFIT_PRICE_TITLE);
+        System.out.println("-" + df.format(eventBenefits.getTotalBenefitPrice()));
     }
 }

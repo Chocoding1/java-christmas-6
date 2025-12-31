@@ -10,15 +10,21 @@ public class EventBenefits {
     private final VisitingDate visitingDate;
     private final Order order;
     private final boolean freeGift;
+    private int totalBenefitPrice;
 
     public EventBenefits(VisitingDate visitingDate, Order order) {
         this.visitingDate = visitingDate;
         this.order = order;
-        freeGift = canFreeGift(order);
+        this.freeGift = canFreeGift(order);
+        this.totalBenefitPrice = 0;
     }
 
     public boolean isFreeGift() {
         return freeGift;
+    }
+
+    public int getTotalBenefitPrice() {
+        return totalBenefitPrice;
     }
 
     public BenefitDetails getBenefitDetails() {
@@ -33,7 +39,9 @@ public class EventBenefits {
 
     private void addDDayDetails(EnumMap<Event, Integer> details) {
         if (visitingDate.getDDayDiscountAmount() > 0) {
-            details.put(Event.D_DAY, visitingDate.getDDayDiscountAmount());
+            int benefitPrice = visitingDate.getDDayDiscountAmount();
+            details.put(Event.D_DAY, benefitPrice);
+            totalBenefitPrice += benefitPrice;
         }
     }
 
@@ -43,7 +51,9 @@ public class EventBenefits {
         if (visitingDate.isWeekendsDiscount()) {
             for (Menu menu : orderInfo.keySet()) {
                 if (MenuGroup.findByMenu(menu) == MenuGroup.MAIN) {
-                    details.put(Event.WEEKENDS, details.getOrDefault(Event.WEEKENDS, 0) + orderInfo.get(menu) * Event.WEEKENDS.getDiscountAmount());
+                    int benefitPrice = orderInfo.get(menu) * Event.WEEKENDS.getDiscountAmount();
+                    details.put(Event.WEEKENDS, details.getOrDefault(Event.WEEKENDS, 0) + benefitPrice);
+                    totalBenefitPrice += benefitPrice;
                 }
             }
             return;
@@ -51,7 +61,9 @@ public class EventBenefits {
 
         for (Menu menu : orderInfo.keySet()) {
             if (MenuGroup.findByMenu(menu) == MenuGroup.DESSERT) {
-                details.put(Event.WEEKDAYS, details.getOrDefault(Event.WEEKDAYS, 0) + orderInfo.get(menu) * Event.WEEKDAYS.getDiscountAmount());
+                int benefitPrice = orderInfo.get(menu) * Event.WEEKDAYS.getDiscountAmount();
+                details.put(Event.WEEKDAYS, details.getOrDefault(Event.WEEKDAYS, 0) + benefitPrice);
+                totalBenefitPrice += benefitPrice;
             }
         }
 
@@ -59,13 +71,17 @@ public class EventBenefits {
 
     private void addSpecialDetails(EnumMap<Event, Integer> details) {
         if (visitingDate.isSpecialDiscount()) {
-            details.put(Event.SPECIAL, Event.SPECIAL.getDiscountAmount());
+            int benefitPrice = Event.SPECIAL.getDiscountAmount();
+            details.put(Event.SPECIAL, benefitPrice);
+            totalBenefitPrice += benefitPrice;
         }
     }
 
     private void addFreeGiftDetails(EnumMap<Event, Integer> details) {
         if (freeGift) {
-            details.put(Event.FREE_GIFT, Event.FREE_GIFT.getDiscountAmount());
+            int benefitPrice = Event.FREE_GIFT.getDiscountAmount();
+            details.put(Event.FREE_GIFT, benefitPrice);
+            totalBenefitPrice += benefitPrice;
         }
     }
 
