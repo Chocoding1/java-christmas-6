@@ -31,5 +31,6 @@ public class EventController {
         outputView.printFreeGift(eventBenefits);
         outputView.printBenefitDetails(eventBenefits);
         outputView.printTotalBenefitPrice(eventBenefits);
+        outputView.printExpectedPayAmount(eventBenefits);
     }
 }

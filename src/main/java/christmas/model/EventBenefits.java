@@ -27,6 +27,14 @@ public class EventBenefits {
         return totalBenefitPrice;
     }
 
+    public int getExpectedPayAmount() {
+        int totalPrice = order.totalPrice();
+        if (freeGift) {
+            return totalPrice - (totalBenefitPrice - Event.FREE_GIFT.getDiscountAmount());
+        }
+        return totalPrice - totalBenefitPrice;
+    }
+
     public BenefitDetails getBenefitDetails() {
         EnumMap<Event, Integer> details = new EnumMap<>(Event.class);
         addDDayDetails(details);
