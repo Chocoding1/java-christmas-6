@@ -38,13 +38,11 @@ public class EventController {
 
     private Order getOrder() {
         String input = inputView.readOrder();
-        Order order = orderParser.parse(input);
-        return order;
+        return orderParser.parse(input);
     }
 
     private VisitingDate getVisitingDate() {
         int date = inputView.readDate();
-        VisitingDate visitingDate = new VisitingDate(date);
-        return visitingDate;
+        return new VisitingDate(date);
     }
 }
