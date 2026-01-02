@@ -1,6 +1,6 @@
 package christmas.model;
 
-import static christmas.model.ErrorMessage.ERROR_INVALID_ORDER;
+import static christmas.constant.ErrorMessage.ERROR_INVALID_ORDER;
 
 import java.util.Arrays;
 import java.util.EnumMap;

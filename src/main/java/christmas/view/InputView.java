@@ -1,6 +1,6 @@
 package christmas.view;
 
-import static christmas.model.ErrorMessage.ERROR_INVALID_DATE;
+import static christmas.constant.ErrorMessage.ERROR_INVALID_DATE;
 
 import camp.nextstep.edu.missionutils.Console;
 

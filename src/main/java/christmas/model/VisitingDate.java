@@ -1,6 +1,6 @@
 package christmas.model;
 
-import static christmas.model.ErrorMessage.ERROR_INVALID_DATE;
+import static christmas.constant.ErrorMessage.ERROR_INVALID_DATE;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
