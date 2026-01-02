@@ -1,5 +1,7 @@
 package christmas.model;
 
+import static christmas.model.ErrorMessage.ERROR_INVALID_DATE;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -16,8 +18,6 @@ public class VisitingDate {
 
     private static final int START_DISCOUNT_AMOUNT = 1000;
     private static final int INCREMENT_AMOUNT = 100;
-
-    private static final String ERROR_OUT_OF_RANGE_DATE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해주세요.";
 
     private final int date;
     private final int dDayDiscountAmount;
@@ -46,7 +46,7 @@ public class VisitingDate {
 
     private void validateRange(int date) {
         if (date < FIRST_DATE || LAST_DATE < date) {
-            throw new IllegalArgumentException(ERROR_OUT_OF_RANGE_DATE);
+            throw new IllegalArgumentException(ERROR_INVALID_DATE.getMessage());
         }
     }
 

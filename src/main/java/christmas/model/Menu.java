@@ -1,5 +1,7 @@
 package christmas.model;
 
+import static christmas.model.ErrorMessage.ERROR_INVALID_ORDER;
+
 public enum Menu {
 
     SOUP("양송이수프", 6000),
@@ -18,8 +20,6 @@ public enum Menu {
     RED_WINE("레드와인", 60000),
     CHAMPAGNE("샴페인", 25000),
     ;
-
-    private static final String ERROR_INVALID_ORDER = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
 
     private final String name;
     private final int price;
@@ -43,6 +43,6 @@ public enum Menu {
                 return menu;
             }
         }
-        throw new IllegalArgumentException(ERROR_INVALID_ORDER);
+        throw new IllegalArgumentException(ERROR_INVALID_ORDER.getMessage());
     }
 }

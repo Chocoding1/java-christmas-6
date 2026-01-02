@@ -1,5 +1,7 @@
 package christmas.model;
 
+import static christmas.model.ErrorMessage.ERROR_INVALID_ORDER;
+
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
@@ -9,8 +11,6 @@ public class OrderParser {
 
     private static final String COMMA = ",";
     private static final String HYPHEN = "-";
-
-    private static final String ERROR_INVALID_ORDER = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
 
     public Order parse(String input) {
         List<String> orderTokens = splitByComma(input);
@@ -43,7 +43,7 @@ public class OrderParser {
 
     private void validateFormat(List<String> menuToken) {
         if (menuToken.size() != 2) {
-            throw new IllegalArgumentException(ERROR_INVALID_ORDER);
+            throw new IllegalArgumentException(ERROR_INVALID_ORDER.getMessage());
         }
     }
 
@@ -64,19 +64,19 @@ public class OrderParser {
         try {
             return Integer.parseInt(initialAmount);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_INVALID_ORDER);
+            throw new IllegalArgumentException(ERROR_INVALID_ORDER.getMessage());
         }
     }
 
     private void validateRange(int amount) {
         if (amount < 1) {
-            throw new IllegalArgumentException(ERROR_INVALID_ORDER);
+            throw new IllegalArgumentException(ERROR_INVALID_ORDER.getMessage());
         }
     }
 
     private void validateDuplicate(Map<Menu, Integer> order, Menu menu) {
         if (order.containsKey(menu)) {
-            throw new IllegalArgumentException(ERROR_INVALID_ORDER);
+            throw new IllegalArgumentException(ERROR_INVALID_ORDER.getMessage());
         }
     }
 }
