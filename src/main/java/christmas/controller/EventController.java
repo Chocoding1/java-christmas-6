@@ -30,6 +30,16 @@ public class EventController {
         printBenefitsPreview(order, eventBenefits);
     }
 
+    private Order getOrder() {
+        String input = inputView.readOrder();
+        return orderParser.parse(input);
+    }
+
+    private VisitingDate getVisitingDate() {
+        int date = inputView.readDate();
+        return new VisitingDate(date);
+    }
+
     private void printBenefitsPreview(Order order, EventBenefits eventBenefits) {
         outputView.printPreviewTitle();
         outputView.printMenu(order);
@@ -39,15 +49,5 @@ public class EventController {
         outputView.printTotalBenefitAmount(eventBenefits);
         outputView.printExpectedPayAmount(eventBenefits);
         outputView.printEventBadge(eventBenefits);
-    }
-
-    private Order getOrder() {
-        String input = inputView.readOrder();
-        return orderParser.parse(input);
-    }
-
-    private VisitingDate getVisitingDate() {
-        int date = inputView.readDate();
-        return new VisitingDate(date);
     }
 }
